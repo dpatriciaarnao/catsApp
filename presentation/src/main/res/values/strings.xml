@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">presentation</string>
+    <string name="label_cat_list">Cats List</string>
+</resources>
