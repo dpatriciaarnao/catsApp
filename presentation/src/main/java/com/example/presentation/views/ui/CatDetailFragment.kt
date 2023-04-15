@@ -13,18 +13,25 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class CatDetailFragment : CatFragment() {
+class CatDetailFragment : CatFragment(), WelcomeCatsActivity.IOnBackPressed {
 
     private lateinit var binding: FragmentCatDetailBinding
     private val rootViewModel: CatViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val isInterceptBackPress: Boolean = true
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                activity?.fragmentManager?.popBackStack()
+                if(isInterceptBackPress){
+                    //  do your work here
+                }else{
+                    isEnabled = false
+                    activity?.onBackPressed()
+                }
             }
         })
+
     }
 
     override fun onCreateView(
@@ -42,14 +49,14 @@ class CatDetailFragment : CatFragment() {
 
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.inclCatDetail.ivBackbutton.setOnClickListener {
-            parentFragmentManager.popBackStack()
-            requireActivity().onBackPressed()
+            activity?.onBackPressed()
         }
     }
-
 
     companion object {
         private const val CAT_SELECTED = "catSelected"
@@ -58,5 +65,9 @@ class CatDetailFragment : CatFragment() {
             CatDetailFragment().also {
                 it.arguments = Bundle().also { b -> b.putString(CAT_SELECTED, catSelected) }
             }
+    }
+
+    override fun onBackPressed(): Boolean {
+        TODO("Not yet implemented")
     }
 }

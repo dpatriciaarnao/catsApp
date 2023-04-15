@@ -121,9 +121,12 @@
                 <TextView
                     android:id="@+id/description"
                     style="@style/roboto_condensed_white_20px"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_10px"
+                    android:layout_marginEnd="@dimen/dp_10px"
                     android:text="Prueba"
+                    android:layout_marginBottom="@dimen/dp_10px"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

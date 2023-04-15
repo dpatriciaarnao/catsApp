@@ -73,4 +73,15 @@ class WelcomeCatsActivity : CatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        val fragment = this.supportFragmentManager.findFragmentById(R.id.main_container)
+        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
+            if (!isCanceled) super.onBackPressed()
+        }
+    }
+
+    interface IOnBackPressed {
+        fun onBackPressed(): Boolean
+    }
 }
